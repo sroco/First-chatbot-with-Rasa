@@ -10,9 +10,58 @@ intents:
   - bot_challenge
   - pedir_soporte
   - ingresar_documento
+  - pedir_documento
+  - registrar_ingreso
+  - registrar_gasto
+  - consultar_saldo
+  - reportar_movimiento
+  - informar_tipo_movimiento
+  - informar_detalle
+  - informar_monto
+
+
+entities:
+  - tipo_movimiento
+  - detalle
+  - monto
+  - documento
+
+
+actions:
+  - action_hello_world
+  - action_registrar_ingreso
+  - action_registrar_gasto
+  - action_consultar_saldo
+  - action_registrar_movimiento
+
 
 slots:
- - 
+  tipo_movimiento:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: tipo_movimiento
+
+  detalle:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: detalle
+
+  monto:
+    type: float
+    mappings:
+      - type: from_entity
+        entity: monto
+
+  documento:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: documento
+
+
+
 
 responses:
   utter_greet:
@@ -38,7 +87,19 @@ responses:
   - text: "Por favor ingresa tu documento para verificar tu identidad."
 
   utter_documento:
-  - text: "Gracias por ingresar tu documento. Esstamos procesando tu solicitud de soporte."
+  - text: "Gracias por ingresar tu documento. Estamos procesando tu solicitud de soporte. Tu documento es {documento}."
+  
+  utter_ask_tipo_movimiento:
+    - text: "¿Qué tipo de movimiento deseas registrar? (ingreso o gasto)"
+
+  utter_ask_detalle:
+    - text: "¿Podrías describir brevemente este movimiento?"
+
+  utter_ask_monto:
+    - text: "¿Cuál es el monto?"
+
+  utter_ask_documento:
+    - text: "Finalmente, ¿cuál es tu número de documento?"
 
 session_config:
   session_expiration_time: 60
